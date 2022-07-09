@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import MoviesList from './MoviesList';
 import MoviesInTheaters from './MoviesInTheaters';
 import ComingSoon from './ComingSoon';
 import TopRatedIndian from './TopRatedIndian';
@@ -39,19 +40,24 @@ function Menu() {
             </div>
             <div className='content-container'>
                 {
-                    tab === TabOptions.MOVIES_IN_THEATERS && <MoviesInTheaters />
+                    // tab === TabOptions.MOVIES_IN_THEATERS && <MoviesInTheaters />
+                    tab === TabOptions.MOVIES_IN_THEATERS && <MoviesList TabName='movies-in-theaters' />
                 }
                 {
-                    tab === TabOptions.COMING_SOON && <ComingSoon />
+                    // tab === TabOptions.COMING_SOON && <ComingSoon />
+                    tab === TabOptions.COMING_SOON && <MoviesList TabName='movies-coming' />
                 }
                 {
-                    tab === TabOptions.TOP_RATED_INDIAN && <TopRatedIndian />
+                    // tab === TabOptions.TOP_RATED_INDIAN && <TopRatedIndian />
+                    tab === TabOptions.TOP_RATED_INDIAN && <MoviesList TabName='top-rated-india' />
                 }
                 {
-                    tab === TabOptions.TOP_RATED_MOVIES && <TopRatedMovies />
+                    // tab === TabOptions.TOP_RATED_MOVIES && <TopRatedMovies />
+                    tab === TabOptions.TOP_RATED_MOVIES && <MoviesList TabName='top-rated-movies' />
                 }
                 {
-                    tab === TabOptions.FAVOURITES && <Favourites />
+                    // tab === TabOptions.FAVOURITES && <Favourites />
+                    tab === TabOptions.FAVOURITES && <MoviesList TabName='favourites' />
                 }
             </div>
         </div>
