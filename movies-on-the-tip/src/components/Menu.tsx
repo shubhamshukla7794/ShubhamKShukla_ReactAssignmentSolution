@@ -57,7 +57,7 @@ function Menu() {
                 }
                 {
                     // tab === TabOptions.FAVOURITES && <Favourites />
-                    tab === TabOptions.FAVOURITES && <MoviesList TabName='favourites' />
+                    tab === TabOptions.FAVOURITES && <MoviesList TabName='favourit' />
                 }
             </div>
         </div>
