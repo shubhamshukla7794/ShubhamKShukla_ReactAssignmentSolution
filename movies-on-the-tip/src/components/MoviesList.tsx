@@ -1,13 +1,17 @@
 import { Component } from "react";
+import { Button, Card } from "react-bootstrap";
+import IMovie  from "../models/IMovie";
 
 type currentTab = {
-    TabName: string
+    TabName: string,
 } 
 
 class MoviesList extends Component<currentTab> {
     render() {
         return (
-            <div>{this.props.TabName}</div>
+            <div>
+                <div>{this.props.TabName}</div>
+            </div>
         );
     }
 }

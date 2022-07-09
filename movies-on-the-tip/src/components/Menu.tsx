@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import MoviesList from './MoviesList';
-import MoviesInTheaters from './MoviesInTheaters';
-import ComingSoon from './ComingSoon';
-import TopRatedIndian from './TopRatedIndian';
-import TopRatedMovies from './TopRatedMovies';
-import Favourites from './Favourites';
+// import MoviesInTheaters from './MoviesInTheaters';
+// import ComingSoon from './ComingSoon';
+// import TopRatedIndian from './TopRatedIndian';
+// import TopRatedMovies from './TopRatedMovies';
+// import Favourites from './Favourites';
 import TabOptions from "../utils/TabOptions";
 
 import './Menu.css';
