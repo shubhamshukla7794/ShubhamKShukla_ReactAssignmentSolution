@@ -1,5 +1,5 @@
 export default interface IMovie {
-    id: string,
+    id?: string,
     title: string,
     year: string,
     genres: string[],
@@ -12,6 +12,6 @@ export default interface IMovie {
     originalTitle: string,
     storyline: string
     actors: string[],
-    imdbRating: number,
-    posterurl: string
+    imdbRating?: string | number ,
+    posterurl?: string
 };
