@@ -3,6 +3,8 @@ import { Alert, Badge, Button, Col, Container, Modal, Row } from "react-bootstra
 import IMovie from "../../models/IMovie";
 import { LoadingStatus } from "../../models/types";
 import LoadingIndicator from "../common/LoadingIndicator";
+import { faImdb } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type Props = {
 
@@ -116,7 +118,7 @@ const MovieDetails = ( props : Props ) => {
                     <Modal.Header closeButton></Modal.Header>
                     <Modal.Body>
                         <img 
-                            src={`${process.env.REACT_APP_BASE_URL}/images/${poster}`} 
+                            src={`${process.env.REACT_APP_IMAGE_URL}${poster}`} 
                             alt="{title}" 
                             className="w-100"
                         />
@@ -127,36 +129,38 @@ const MovieDetails = ( props : Props ) => {
                 <Container className="my-4">
                     <Row>
                         <Col xs={12}>
-                            <h1>{title}</h1>
+                            <h1 className="movieTitle">{title} ({year})</h1>
                             <hr />
                         </Col>
                         <Col xs={12} lg={4}>
                             
                                 <img 
-                                    src={`${process.env.REACT_APP_BASE_URL}/images/${poster}`} 
+                                    src={`${process.env.REACT_APP_IMAGE_URL}${poster}`} 
                                     alt="{title}" 
                                     onClick={handleShow}
                                 />
                         </Col>
                         <Col xs={12} lg={8}>
                             <Row>
-                                <Col xs={4}>Imdb Rating</Col>
+                                <Col xs={4} className="detailsTitle">
+                                    <FontAwesomeIcon icon={faImdb} style={{color:'#F5C518'}}/> Imdb Rating
+                                </Col>
                                 <Col xs={8}>{imdbRating}</Col>
                             </Row>
                             <Row>
-                                <Col xs={4}>Content Rating</Col>
+                                <Col xs={4} className="detailsTitle">Content Rating</Col>
                                 <Col xs={8}>{contentRating}</Col>
                             </Row>
                             <Row>
-                                <Col xs={4}>Average Rating</Col>
+                                <Col xs={4} className="detailsTitle">Average Rating</Col>
                                 <Col xs={8}>{averageRating}</Col>
                             </Row>
                             <Row>
-                                <Col xs={4}>Duration</Col>
+                                <Col xs={4} className="detailsTitle">Duration</Col>
                                 <Col xs={8}>{duration.substring(2)}</Col>
                             </Row>
                             <Row>
-                                <Col xs={4} className="my-2">Genres</Col>
+                                <Col xs={4} className="detailsTitle my-2">Genres</Col>
                                 <Col xs={8}>
                                     {
                                         genres.map(
@@ -168,7 +172,7 @@ const MovieDetails = ( props : Props ) => {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={4} className="my-2">Actors</Col>
+                                <Col xs={4} className="detailsTitle my-2">Actors</Col>
                                 <Col xs={8}>
                                     {
                                         actors.map(
@@ -180,11 +184,11 @@ const MovieDetails = ( props : Props ) => {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={4}>Release Date</Col>
+                                <Col xs={4} className="detailsTitle">Release Date</Col>
                                 <Col xs={8}>{releaseDate}</Col>
                             </Row>
                             <Row>
-                                <Col xs={4}>Story Line</Col>
+                                <Col xs={4} className="detailsTitle">Story Line</Col>
                                 <Col xs={8}>{storyline}</Col>
                             </Row>
                         </Col>

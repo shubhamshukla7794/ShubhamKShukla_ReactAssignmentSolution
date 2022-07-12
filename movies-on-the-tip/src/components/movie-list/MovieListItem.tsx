@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Card } from "react-bootstrap";
 import IMovie from "../../models/IMovie";
 
+
 type Props = {
     movie : IMovie
 };
