@@ -69,9 +69,9 @@ const movie:IMovie = {
 function App() {
   return (
     <div>
-      {/* <Menu></Menu> */}
+      <Menu />
       {/* <MoviesList TabName='movies-in-theaters' /> */}
-      <MovieDetails />
+      {/* <MovieDetails /> */}
     </div>
   );
 }

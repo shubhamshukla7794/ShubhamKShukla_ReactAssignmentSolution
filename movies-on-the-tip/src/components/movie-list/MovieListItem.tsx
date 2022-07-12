@@ -20,7 +20,7 @@ const MovieListItem = ( { movie }:Props) => {
         <div>
             <Card>
                 <a href="/">
-                <Card.Img variant="top" src={`${process.env.REACT_APP_BASE_URL}/images/${poster}`} alt={title} className="card-img" />
+                <Card.Img variant="top" src={`${process.env.REACT_APP_IMAGE_URL}${poster}`} alt={title} className="card-img" />
                 </a>
                 <Card.Body>
                     <Card.Title className="card-title">{title.length>23 ? title.substring(0,23).concat('...'): title}</Card.Title>
