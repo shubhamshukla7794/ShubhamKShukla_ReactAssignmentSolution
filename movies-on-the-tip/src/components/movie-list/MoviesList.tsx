@@ -7,7 +7,7 @@ import MovieListItem from "./MovieListItem";
 import { getMovies } from "../../services/Movie";
 
 type Props = {
-    TabName: string
+    tabName: string
 } 
 
 type State = {
@@ -22,14 +22,14 @@ class MoviesList extends Component<Props, State> {
 
     state: State = {
         status: 'LOADING',
-        tabName: this.props.TabName
+        tabName: this.props.tabName
     };
 
     render() {
 
         let el;
 
-        const {status, movies, error} = this.state;
+        const {status, movies, error, tabName} = this.state;
         
 
         switch ( status ) {
@@ -47,7 +47,7 @@ class MoviesList extends Component<Props, State> {
                             movies?.map(
                                 (movie, idx) => (
                                     <Col key={idx} className="d-flex align-items-stretch my-3">
-                                        <MovieListItem movie={movie} />
+                                        <MovieListItem movie={movie} tabName={tabName} />
                                     </Col>
                                 )
                             )

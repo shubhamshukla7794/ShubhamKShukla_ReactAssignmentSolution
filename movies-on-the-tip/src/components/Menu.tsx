@@ -34,19 +34,19 @@ function Menu() {
             </div>
             <div className='content-container'>
                 {
-                    tab === TabOptions.MOVIES_IN_THEATERS && <MoviesList TabName='movies-in-theaters' />
+                    tab === TabOptions.MOVIES_IN_THEATERS && <MoviesList tabName='movies-in-theaters' />
                 }
                 {
-                    tab === TabOptions.COMING_SOON && <MoviesList TabName='movies-coming' />
+                    tab === TabOptions.COMING_SOON && <MoviesList tabName='movies-coming' />
                 }
                 {
-                    tab === TabOptions.TOP_RATED_INDIAN && <MoviesList TabName='top-rated-india' />
+                    tab === TabOptions.TOP_RATED_INDIAN && <MoviesList tabName='top-rated-india' />
                 }
                 {
-                    tab === TabOptions.TOP_RATED_MOVIES && <MoviesList TabName='top-rated-movies' />
+                    tab === TabOptions.TOP_RATED_MOVIES && <MoviesList tabName='top-rated-movies' />
                 }
                 {
-                    tab === TabOptions.FAVOURITES && <MoviesList TabName='favourit' />
+                    tab === TabOptions.FAVOURITES && <MoviesList tabName='favourit' />
                 }
             </div>
         </div>

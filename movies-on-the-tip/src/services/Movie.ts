@@ -8,6 +8,18 @@ const getMovies = async ( tabName : string) => {
     return response.data;
 }
 
+const getMovieDetailsByID = async ( tabName : string, id : number ) => {
+    const response = await axios.get<IMovie>(`${baseURL}/${tabName}/${id}`);
+    return response.data;
+}
+
+const getMovieDetailsByTitleAndYear = async ( tabName : string,title : string, year : string ) => {
+    const response = await axios.get<IMovie[]>(`${baseURL}/${tabName}?title=${title}&year=${year}`);
+    return response.data;
+}
+
 export {
-    getMovies
+    getMovies,
+    getMovieDetailsByID,
+    getMovieDetailsByTitleAndYear
 };

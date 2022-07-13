@@ -25,6 +25,11 @@
     padding: 2.5em 2em;
 }
 
+.poster-container {
+    height: 18.5em; 
+    width: 13.875em;
+}
+
 .card-img {
     height: 18.5em; 
     width: 13.875em;

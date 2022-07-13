@@ -5,67 +5,12 @@ import { LoadingStatus } from "../../models/types";
 import LoadingIndicator from "../common/LoadingIndicator";
 import { faImdb } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getMovieDetailsByID, getMovieDetailsByTitleAndYear } from "../../services/Movie";
 
 type Props = {
 
 };
 
-const blackPanther = {
-    "id": "1",
-    "title": "Black Panther",
-    "year": "2018",
-    "genres": [
-      "Action",
-      "Adventure",
-      "Sci-Fi"
-    ],
-    "ratings": [
-      4,
-      1,
-      9,
-      6,
-      2,
-      10,
-      6,
-      5,
-      1,
-      7,
-      4,
-      5,
-      6,
-      5,
-      6,
-      3,
-      10,
-      10,
-      8,
-      2,
-      5,
-      3,
-      4,
-      6,
-      6,
-      7,
-      9,
-      4,
-      4,
-      9
-    ],
-    "poster": "MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY500_CR0,0,337,500_AL_.jpg",
-    "contentRating": "15",
-    "duration": "PT134M",
-    "releaseDate": "2018-02-14",
-    "averageRating": 0,
-    "originalTitle": "",
-    "storyline": "After the events of Captain America: Civil War, King T'Challa returns home to the reclusive, technologically advanced African nation of Wakanda to serve as his country's new leader. However, T'Challa soon finds that he is challenged for the throne from factions within his own country. When two foes conspire to destroy Wakanda, the hero known as Black Panther must team up with C.I.A. agent Everett K. Ross and members of the Dora Milaje, Wakandan special forces, to prevent Wakanda from being dragged into a world war.                Written by\nEditor",
-    "actors": [
-      "Chadwick Boseman",
-      "Michael B. Jordan",
-      "Lupita Nyong'o"
-    ],
-    "imdbRating": 7,
-    "posterurl": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY500_CR0,0,337,500_AL_.jpg"
-  };
 
 const MovieDetails = ( props : Props ) => {
     const [ status, setStatus] = useState<LoadingStatus>( 'LOADING' );
@@ -76,14 +21,27 @@ const MovieDetails = ( props : Props ) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const fetchMovie = () => {
-        setTimeout(() => {
-            setMovie(blackPanther);
-            setStatus( 'LOADED' );
-        }, 1000);
-    };
+   
 
-    useEffect( fetchMovie, [] );
+    useEffect( 
+        () => {
+        const fetchMovie = async () => {
+            
+            try {
+                // const data = await getMovieDetailsByID('movies-in-theaters',1); 
+                const data = await getMovieDetailsByTitleAndYear('top-rated-india','Swades:+We,+the+People','2004'); 
+                console.log(data[0]);
+                setMovie( data[0] );
+                setStatus( 'LOADED' );
+            } catch (error) {
+                setError( error as Error );
+                setStatus( 'ERROR_LOADING');
+            }
+            
+        };
+
+        fetchMovie();
+    }, [] );
 
     let el;
 
