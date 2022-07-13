@@ -5,7 +5,8 @@ import { LoadingStatus } from "../../models/types";
 import LoadingIndicator from "../common/LoadingIndicator";
 import { faImdb } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getMovieDetailsByTitleAndYear } from "../../services/Movie";
+import { getMovieDetailsByID, getMovieDetailsByTitleAndYear } from "../../services/Movie";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 type Props = {
 
@@ -21,17 +22,22 @@ const MovieDetails = ( props : Props ) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-   
+    const param = useParams();
+    const info : any = useLocation().state;
 
     useEffect( 
         () => {
         const fetchMovie = async () => {
             
             try {
-                // const data = await getMovieDetailsByID('movies-in-theaters',1); 
-                const data = await getMovieDetailsByTitleAndYear('top-rated-india','Swades%3A%20We%2C%20the%20People','2004'); 
-                console.log(data[0]);
-                setMovie( data[0] );
+
+                if (info.data.id) {
+                    const data = await getMovieDetailsByID(info.data.currentTab, info.data.id);
+                    setMovie(data);
+                } else {
+                    const data = await getMovieDetailsByTitleAndYear(info.data.currentTab, param.title as string, info.data.releasedYear); 
+                    setMovie( data[0] );
+                }                
                 setStatus( 'LOADED' );
             } catch (error) {
                 setError( error as Error );
@@ -80,7 +86,7 @@ const MovieDetails = ( props : Props ) => {
                     </Modal.Body>
                 </Modal>
                 <div className="my-3">
-                <a href="/" className="backHome"> Back to Home</a>
+                <Link to="/" className="backHome"> Back to Home</Link>
                 <Container className="my-4">
                     <Row>
                         <Col xs={12}>

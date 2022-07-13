@@ -8,7 +8,7 @@ const getMovies = async ( tabName : string) => {
     return response.data;
 }
 
-const getMovieDetailsByID = async ( tabName : string, id : number ) => {
+const getMovieDetailsByID = async ( tabName : string, id : string ) => {
     const response = await axios.get<IMovie>(`${baseURL}/${tabName}/${id}`);
     return response.data;
 }

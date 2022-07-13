@@ -1,6 +1,8 @@
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { Button, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import IMovie from "../../models/IMovie";
 
 
@@ -12,21 +14,30 @@ type Props = {
 const MovieListItem = ( { movie, tabName }:Props) => {
 
     const {
+        id,
         title,
-        poster
+        poster,
+        year
     } = movie;
 
-    const currentTab = tabName;
+    // const currentTab = tabName;
     const encodedTitle = encodeURIComponent(title);
+
+    const [data, setInfo] = useState({
+        currentTab : tabName,
+        releasedYear : year,
+        id: id
+    });
  
     return (
         <div>
             <Card>
-                <a href="/">
+                <Link to={`/${encodedTitle}`} state={{data:data}}>
+                {/* <Link to={`/${encodedTitle}`} > */}
                     <div className="poster-container">
                         <Card.Img variant="top" src={`${process.env.REACT_APP_IMAGE_URL}${poster}`} alt={title}  className="card-img"/>
                     </div>
-                </a>
+                </Link>
                 <Card.Body>
                     <Card.Title className="card-title">{ title.length > 23 ? title.substring(0,23).concat('...') : title}</Card.Title>
                     <div className="text-center my-3">
