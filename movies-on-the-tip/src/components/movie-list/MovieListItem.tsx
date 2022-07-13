@@ -20,10 +20,9 @@ const MovieListItem = ( { movie, tabName }:Props) => {
         year
     } = movie;
 
-    // const currentTab = tabName;
     const encodedTitle = encodeURIComponent(title);
 
-    const [data, setInfo] = useState({
+    const [data] = useState({
         currentTab : tabName,
         releasedYear : year,
         id: id
@@ -33,7 +32,6 @@ const MovieListItem = ( { movie, tabName }:Props) => {
         <div>
             <Card>
                 <Link to={`/${encodedTitle}`} state={{data:data}}>
-                {/* <Link to={`/${encodedTitle}`} > */}
                     <div className="poster-container">
                         <Card.Img variant="top" src={`${process.env.REACT_APP_IMAGE_URL}${poster}`} alt={title}  className="card-img"/>
                     </div>

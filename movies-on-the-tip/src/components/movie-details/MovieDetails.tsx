@@ -47,7 +47,7 @@ const MovieDetails = ( props : Props ) => {
         };
 
         fetchMovie();
-    }, [] );
+    }, [info.data.currentTab, info.data.id, info.data.releasedYear, param.title] );
 
     let el;
 
