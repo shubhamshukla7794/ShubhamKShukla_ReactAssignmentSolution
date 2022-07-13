@@ -17,6 +17,7 @@ const MovieListItem = ( { movie, tabName }:Props) => {
     } = movie;
 
     const currentTab = tabName;
+    const encodedTitle = encodeURIComponent(title);
  
     return (
         <div>

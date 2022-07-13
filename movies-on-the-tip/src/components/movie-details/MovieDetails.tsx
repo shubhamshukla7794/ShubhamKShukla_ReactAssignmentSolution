@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Alert, Badge, Button, Col, Container, Modal, Row } from "react-bootstrap";
+import { Alert, Badge, Col, Container, Modal, Row } from "react-bootstrap";
 import IMovie from "../../models/IMovie";
 import { LoadingStatus } from "../../models/types";
 import LoadingIndicator from "../common/LoadingIndicator";
 import { faImdb } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getMovieDetailsByID, getMovieDetailsByTitleAndYear } from "../../services/Movie";
+import { getMovieDetailsByTitleAndYear } from "../../services/Movie";
 
 type Props = {
 
@@ -29,7 +29,7 @@ const MovieDetails = ( props : Props ) => {
             
             try {
                 // const data = await getMovieDetailsByID('movies-in-theaters',1); 
-                const data = await getMovieDetailsByTitleAndYear('top-rated-india','Swades:+We,+the+People','2004'); 
+                const data = await getMovieDetailsByTitleAndYear('top-rated-india','Swades%3A%20We%2C%20the%20People','2004'); 
                 console.log(data[0]);
                 setMovie( data[0] );
                 setStatus( 'LOADED' );
@@ -58,17 +58,14 @@ const MovieDetails = ( props : Props ) => {
                 title,
                 year,
                 genres,
-                ratings,
                 poster,
                 contentRating,
                 duration,
                 releaseDate,
                 averageRating,
-                originalTitle,
                 storyline,
                 actors,
                 imdbRating,
-                posterurl
             } = movie as IMovie;
             el = (
                 <>
