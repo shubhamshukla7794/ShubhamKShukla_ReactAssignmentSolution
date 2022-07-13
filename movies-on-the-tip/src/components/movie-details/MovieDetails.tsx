@@ -79,7 +79,7 @@ const MovieDetails = ( props : Props ) => {
                     <Modal.Header closeButton></Modal.Header>
                     <Modal.Body>
                         <img 
-                            src={`${process.env.REACT_APP_IMAGE_URL}${poster}`} 
+                            src={`${process.env.REACT_APP_BASE_URL}/images/${poster}`} 
                             alt="{title}" 
                             className="w-100"
                         />
@@ -96,7 +96,7 @@ const MovieDetails = ( props : Props ) => {
                         <Col xs={12} lg={4}>
                             
                                 <img 
-                                    src={`${process.env.REACT_APP_IMAGE_URL}${poster}`} 
+                                    src={`${process.env.REACT_APP_BASE_URL}/images/${poster}`} 
                                     alt="{title}" 
                                     onClick={handleShow}
                                 />

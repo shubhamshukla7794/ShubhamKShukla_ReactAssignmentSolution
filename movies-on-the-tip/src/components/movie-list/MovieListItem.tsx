@@ -33,7 +33,7 @@ const MovieListItem = ( { movie, tabName }:Props) => {
             <Card>
                 <Link to={`/${encodedTitle}`} state={{data:data}}>
                     <div className="poster-container">
-                        <Card.Img variant="top" src={`${process.env.REACT_APP_IMAGE_URL}${poster}`} alt={title}  className="card-img"/>
+                        <Card.Img variant="top" src={`${process.env.REACT_APP_BASE_URL}/images/${poster}`} alt={title}  className="card-img"/>
                     </div>
                 </Link>
                 <Card.Body>
