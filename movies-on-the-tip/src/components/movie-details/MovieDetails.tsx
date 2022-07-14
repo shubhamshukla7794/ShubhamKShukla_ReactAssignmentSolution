@@ -7,6 +7,7 @@ import { faImdb } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getMovieDetailsByID, getMovieDetailsByTitleAndYear } from "../../services/Movie";
 import { Link, useLocation, useParams } from "react-router-dom";
+import { faChartLine, faClock, faCalendarDays, faFilm, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
 
@@ -85,75 +86,118 @@ const MovieDetails = ( props : Props ) => {
                         />
                     </Modal.Body>
                 </Modal>
-                <div className="my-3">
-                <Link to="/" className="backHome"> Back to Home</Link>
-                <Container className="my-4">
+                <div className="back-menu">
+                    <Link to="/" className="back-home"><FontAwesomeIcon icon={faAngleLeft}/> Back to Home</Link>
+                </div>
+                <div className="content-container">
+                <Container>
+                    <hr className="hr-movie-details"/>
                     <Row>
-                        <Col xs={12}>
+                        {/* <Col xs={12}>
                             <h1 className="movieTitle">{title} ({year})</h1>
                             <hr />
-                        </Col>
+                        </Col> */}
                         <Col xs={12} lg={4}>
                             
                                 <img 
                                     src={`${process.env.REACT_APP_BASE_URL}/images/${poster}`} 
-                                    alt="{title}" 
+                                    alt={title} 
+                                    className="img-container"
                                     onClick={handleShow}
                                 />
+                            
                         </Col>
                         <Col xs={12} lg={8}>
                             <Row>
-                                <Col xs={4} className="detailsTitle">
-                                    <FontAwesomeIcon icon={faImdb} style={{color:'#F5C518'}}/> Imdb Rating
-                                </Col>
-                                <Col xs={8}>{imdbRating}</Col>
-                            </Row>
-                            <Row>
-                                <Col xs={4} className="detailsTitle">Content Rating</Col>
-                                <Col xs={8}>{contentRating}</Col>
-                            </Row>
-                            <Row>
-                                <Col xs={4} className="detailsTitle">Average Rating</Col>
-                                <Col xs={8}>{averageRating}</Col>
-                            </Row>
-                            <Row>
-                                <Col xs={4} className="detailsTitle">Duration</Col>
-                                <Col xs={8}>{duration.substring(2)}</Col>
-                            </Row>
-                            <Row>
-                                <Col xs={4} className="detailsTitle my-2">Genres</Col>
-                                <Col xs={8}>
-                                    {
-                                        genres.map(
-                                            genre => (
-                                                <Badge bg="primary" className="badge" key={genre}>{genre}</Badge>
-                                            )
-                                        )
-                                    }
+                                <Col xs={12}>
+                                    <h1><span className="movieTitle">{title}</span> <span className="movieYear">({year})</span></h1>
+                                    <hr className="hr-movie-details"/>
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col xs={4} className="detailsTitle my-2">Actors</Col>
-                                <Col xs={8}>
-                                    {
-                                        actors.map(
-                                            actor => (
-                                                <Badge bg="secondary me-2" key={actor}>{actor}</Badge>
-                                            )
-                                        )
-                                    }
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={4} className="detailsTitle">Release Date</Col>
-                                <Col xs={8}>{releaseDate}</Col>
-                            </Row>
-                            <Row>
-                                <Col xs={4} className="detailsTitle">Story Line</Col>
-                                <Col xs={8}>{storyline}</Col>
-                            </Row>
+                            {
+                                imdbRating && (
+                                    <Row  className="otherDetails">
+                                        <Col xs={4}>
+                                            <FontAwesomeIcon icon={faImdb} style={{color:'#F5C518'}}/> <span className="otherDetailsTitle">Imdb Rating</span>
+                                        </Col>
+                                        <Col xs={8}>{imdbRating}/10</Col>
+                                    </Row>
+                                )
+                            }
+                            {
+                                contentRating && (
+                                    <Row  className="otherDetails">
+                                        <Col xs={4}>
+                                            <FontAwesomeIcon icon={faFilm} style={{color:'#141414'}}/> <span className="otherDetailsTitle">Content Rating</span>
+                                        </Col>
+                                        <Col xs={8}>{contentRating}</Col>
+                                    </Row>
+                                )
+                            }
+                            {
+                                averageRating>=0 && (
+                                    <Row  className="otherDetails">
+                                        <Col xs={4}>
+                                            <FontAwesomeIcon icon={faChartLine} style={{color:'#7CBB62'}}/> <span className="otherDetailsTitle">Average Rating</span>
+                                        </Col>
+                                        <Col xs={8}>{averageRating}</Col>
+                                    </Row>
+                                )
+                            }
+                            {
+                                duration && (
+                                    <Row  className="otherDetails">
+                                        <Col xs={4}>
+                                            <FontAwesomeIcon icon={faClock} style={{color:'#5BAAEF'}}/> <span className="otherDetailsTitle">Duration</span>
+                                        </Col>
+                                        <Col xs={8}>{Math.floor(Number(duration.replace("PT","").replace("M",""))/60)}h {Number(duration.replace("PT","").replace("M",""))%60}m</Col>
+                                    </Row>
+                                )
+                            }
+                            {
+                                releaseDate && (
+                                    <Row  className="otherDetails">
+                                        <Col xs={4}>
+                                            <FontAwesomeIcon icon={faCalendarDays} style={{color:'#2B4162'}}/> <span className="otherDetailsTitle">Release Date</span>
+                                        </Col>
+                                        <Col xs={8}>{releaseDate}</Col>
+                                    </Row>
+                                )
+                            }
                         </Col>
                     </Row>
+                    <hr className="hr-movie-details"/>
+                    <div>
+                        <div className="detailsTitle">Genres</div>
+                        <div>
+                            {
+                                genres.map(
+                                    genre => (
+                                        <Badge pill bg="primary" className="badge" key={genre}>{genre}</Badge>
+                                    )
+                                )
+                            }
+                        </div>
+                    </div>
+                    <hr className="hr-movie-details"/>
+                    <div>
+                        <div className="detailsTitle">Stars</div>
+                        <div>
+                            {
+                                actors.map(
+                                    actor => (
+                                        <Badge bg="secondary" className="badge" key={actor}>{actor}</Badge>
+                                    )
+                                )
+                            }
+                        </div>
+                    </div>
+                    <hr className="hr-movie-details"/>
+                    <div>
+                        <div className="detailsTitle">Storyline</div>
+                        <div className="story">{storyline}</div>
+                    </div>
+                    <hr className="hr-movie-details"/>
                 </Container>
                 </div>
                 </>

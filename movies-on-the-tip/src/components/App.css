@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap');
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
 .menu-tabs {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
@@ -31,8 +37,8 @@
 }
 
 .card-img {
-    height: 18.5em; 
-    width: 13.875em;
+    height: 100%;
+    object-fit: cover;
 }
 
 .card-title {
@@ -40,23 +46,67 @@
     font-weight: 600;
 }
 
-.backHome {
-    font-size: 1.2em;
+.back-menu {
+    padding: 1em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.back-home {
+    font-size: 1em;
     padding: 1em;
     margin-top: 2em;
     text-decoration: none;
 }
 
-.movieTitle {
-    font-weight: 700;
+.back-home:hover {
+    color: #4288c4;
+    border-bottom: 2px solid #4288c4;;
 }
 
-.detailsTitle {
+.img-container {
+    width: 25em;
+    height: 35em;
+}
+
+.hr-movie-details {
+    border: 1px solid rgba(0,0,0,0.9);
+}
+
+.movieTitle {
+    font-weight: 800;
+    font-size: 1.3em;
+}
+
+.movieYear {
+    font-weight: 600;
+    font-size: 1em;
+}
+
+.otherDetails {
+    font-size: 1.7em;
+    margin: 1.5em 0;
+}
+
+.otherDetailsTitle {
     font-weight: 600;
 }
 
+.detailsTitle {
+    font-weight: 700;
+    font-size: 1.7em;
+    border-left: 7px solid #F6CA2C;
+    padding-left: 0.5em;
+    margin: 1em 0;
+}
+
 .badge {
-    font-size: 0.95em;
+    font-size: 1.2em;
     padding: 0.5em 1em;
-    margin: 0.5em 1em 0.5em 0em;
+    margin: 0.5em 1em 1em 0em;
+}
+
+.story {
+    font-size: 1.2em;
+    text-align: justify;
+    margin-bottom: 1.5em;
 }
