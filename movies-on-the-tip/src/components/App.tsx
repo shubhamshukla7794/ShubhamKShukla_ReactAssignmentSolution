@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import { Route, Routes } from "react-router-dom";
 import MovieDetails from "./movie-details/MovieDetails";
+// import Home from "./Home";
 
 
 function App() {

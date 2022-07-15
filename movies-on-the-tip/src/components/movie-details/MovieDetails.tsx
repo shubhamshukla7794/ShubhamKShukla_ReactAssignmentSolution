@@ -93,19 +93,13 @@ const MovieDetails = ( props : Props ) => {
                 <Container>
                     <hr className="hr-movie-details"/>
                     <Row>
-                        {/* <Col xs={12}>
-                            <h1 className="movieTitle">{title} ({year})</h1>
-                            <hr />
-                        </Col> */}
                         <Col xs={12} lg={4}>
-                            
                                 <img 
                                     src={`${process.env.REACT_APP_BASE_URL}/images/${poster}`} 
                                     alt={title} 
                                     className="img-container"
                                     onClick={handleShow}
                                 />
-                            
                         </Col>
                         <Col xs={12} lg={8}>
                             <Row>

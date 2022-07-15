@@ -18,8 +18,14 @@ const getMovieDetailsByTitleAndYear = async ( tabName : string,title : string, y
     return response.data;
 }
 
+const getMoviesFromSearching =async ( tabName : string, searchedText : string) => {
+    const response = await axios.get<IMovie[]>(`${baseURL}/${tabName}?q=${searchedText}`);
+    return response.data;
+}
+
 export {
     getMovies,
     getMovieDetailsByID,
-    getMovieDetailsByTitleAndYear
+    getMovieDetailsByTitleAndYear,
+    getMoviesFromSearching
 };
