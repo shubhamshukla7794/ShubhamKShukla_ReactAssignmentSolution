@@ -15,25 +15,36 @@ type Props = {
 type State = {
     status: LoadingStatus,
     movies?: IMovie[],
-    error?: Error,
+    error?: Error | null,
     tabName: string,
-    searchedText?: string
+    searchedText: string,
+    oldText: string
 };
 
 
 class MoviesList extends Component<Props, State> {
 
-    state: State = {
-        status: 'LOADING',
-        tabName: this.props.tabName,
-    };
+    constructor( props : Props) {
+        super(props);
+
+        console.log('constructor');
+        this.state = {
+            status: 'LOADING',
+            movies: [],
+            error: null,
+            tabName: this.props.tabName,  
+            searchedText: '',
+            oldText: ''
+        };
+    }
+
+    
 
     render() {
 
         let el;
-        let search;
 
-        const {status, movies, error, tabName, searchedText} = this.state;
+        const {status, movies, error, tabName} = this.state;
         
 
         switch ( status ) {
@@ -91,6 +102,53 @@ class MoviesList extends Component<Props, State> {
         return el;
     }
 
+//     async fetchMovies() {
+
+//         this.setState({
+//             status: 'LOADING',
+//         });
+
+//         try {
+//             const tabName = this.state.tabName;
+//             let search = this.state.searchedText;
+//             let moviesList;
+            
+//             if( search === '' || search === undefined) {
+//                 moviesList = await getMovies(tabName);
+//             } else {
+//                 moviesList = await getMoviesFromSearching(tabName, search)
+//             }
+            
+//             this.setState({
+//                 status: 'LOADED',
+//                 movies: moviesList,
+//             });
+
+//         } catch (err) {
+//             this.setState({
+//                 status: 'ERROR_LOADING',
+//                 error: err as Error
+//             });
+//         }
+//    }
+
+//    componentDidMount() {
+//         console.log('componentDidMount');
+//         this.fetchMovies();
+//    }
+
+//    componentDidUpdate( oldProps : Props, oldState : State) {
+//         console.log('componentDidUpdate');
+//         console.log(oldState.searchedText);
+//         console.log(this.state.searchedText);
+//         if (oldState.searchedText !== this.state.searchedText) {
+//             console.log('inside if');
+//             this.fetchMovies();   
+//         }
+            
+//    }
+
+
     async componentDidMount() {
       this.setState({
         status: 'LOADING'
@@ -112,13 +170,15 @@ class MoviesList extends Component<Props, State> {
       }
     }
 
-    async componentDidUpdate() {
+    async componentDidUpdate(oldProps : Props, oldState : State) {
         try {
             const tabName = this.state.tabName;
             let search = this.state.searchedText;
           //   const moviesList = await getMovies(tabName);
           let moviesList;
-          if( search === '' || search === undefined) {
+          console.log(oldState.searchedText);
+        console.log(this.state.searchedText);
+          if( (search === '' || search === undefined) ) {
               moviesList = await getMovies(tabName);
           } else {
               moviesList = await getMoviesFromSearching(tabName, search)

@@ -1,17 +1,16 @@
-import Menu from "./Menu";
+import Home from "./Home";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import { Route, Routes } from "react-router-dom";
 import MovieDetails from "./movie-details/MovieDetails";
-// import Home from "./Home";
 
 
 function App() {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<Menu />}></Route>
+                <Route path="/" element={<Home />}></Route>
                 <Route path="/:title" element={<MovieDetails />}></Route>
             </Routes>
         </div>

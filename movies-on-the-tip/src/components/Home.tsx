@@ -1,9 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import MoviesList from './movie-list/MoviesList';
 import TabOptions from "../utils/TabOptions";
-import { Button, Form, InputGroup } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -16,29 +13,9 @@ const tabOptions = [
     TabOptions.FAVOURITES
 ]
 
-function Menu() {
+function Home() {
 
     const [ tab, setTab ] = useState<TabOptions>( TabOptions.MOVIES_IN_THEATERS );
-    // const [ searchtext, setSearchText] = useState<string>();
-    // useEffect(() => {
-    //     let fetch2 = () => {
-    //         // console.log(searchRef?.current?.value as string);
-    //         // setSearchText(searchRef?.current?.value as string);
-    //         console.log(searchtext);
-    //     }
-
-    //     fetch2();
-    // },);
-
-    // const searchRef = useRef<HTMLInputElement>(null);
-    
-
-    // let fetch = () => {
-    //     // console.log(searchRef?.current?.value as string);
-    //     setSearchText(searchRef?.current?.value as string);
-    //     // console.log(searchtext);
-    //     // fetch2();
-    // }
 
 
     return (
@@ -57,17 +34,6 @@ function Menu() {
                     )
                 )
             }
-            {/* <InputGroup className="search-box">
-                <Form.Control
-                placeholder="Search Movie"
-                ref={searchRef}
-                type='text'
-                onInput={fetch}
-                />
-                <Button variant="primary" id="button-search">
-                    <FontAwesomeIcon icon={faMagnifyingGlass}/>
-                </Button>
-            </InputGroup> */}
             </div>
             <div className='content-container'>
                 {
@@ -90,4 +56,4 @@ function Menu() {
     );
 }
 
-export default Menu;
+export default Home;
