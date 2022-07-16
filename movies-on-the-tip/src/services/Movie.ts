@@ -18,14 +18,32 @@ const getMovieDetailsByTitleAndYear = async ( tabName : string,title : string, y
     return response.data;
 }
 
-const getMoviesFromSearching =async ( tabName : string, searchedText : string) => {
-    const response = await axios.get<IMovie[]>(`${baseURL}/${tabName}?q=${searchedText}`);
+const getMoviesFromSearching = async ( tabName : string, searchedText : string) => {
+    const response = await axios.get<IMovie[]>(`${baseURL}/${tabName}?title_like=${searchedText}`);
     return response.data;
 }
+
+const addMovieToFavourite = async (favMovie : IMovie) => {
+    const response = await axios.post<IMovie>(`${baseURL}/favourit`, favMovie, {
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    });
+
+    return response.data;
+}
+
+const deleteMovieFromFavourite = async (id : string) => {
+    const response = await axios.delete(`${baseURL}/favourit/${id}`);
+    return response.data;
+}
+
 
 export {
     getMovies,
     getMovieDetailsByID,
     getMovieDetailsByTitleAndYear,
-    getMoviesFromSearching
+    getMoviesFromSearching,
+    addMovieToFavourite,
+    deleteMovieFromFavourite
 };

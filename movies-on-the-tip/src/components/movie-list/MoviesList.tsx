@@ -26,7 +26,6 @@ class MoviesList extends Component<Props, State> {
     constructor( props : Props) {
         super(props);
 
-        console.log('constructor');
         this.state = {
             status: 'LOADING',
             movies: [],

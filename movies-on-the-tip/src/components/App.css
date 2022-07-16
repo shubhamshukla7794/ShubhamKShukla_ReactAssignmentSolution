@@ -49,9 +49,18 @@ body {
     padding: 2.5em 2em;
 }
 
+
+.movie-card {
+    border: none;
+}
+
+.movie-card:hover {
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.4);
+}
+
 .poster-container {
     height: 18.5em; 
-    width: 13.875em;
+    width: 14.875em;
 }
 
 .card-img {
@@ -62,6 +71,15 @@ body {
 .card-title {
     font-size: 1em;
     font-weight: 600;
+}
+
+.add-to-fav {
+    text-align: center;
+    margin: 0.3em 0;
+}
+
+.btn-fav {
+    border: none;
 }
 
 .back-menu {
