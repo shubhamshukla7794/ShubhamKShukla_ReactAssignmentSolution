@@ -1,5 +1,5 @@
 import { ChangeEvent, Component } from "react";
-import { Alert, Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Alert, Col, Form, InputGroup, Row } from "react-bootstrap";
 import LoadingIndicator from "../common/LoadingIndicator";
 import IMovie from "../../models/IMovie";
 import { LoadingStatus } from "../../models/types";
@@ -17,8 +17,7 @@ type State = {
     movies?: IMovie[],
     error?: Error | null,
     tabName: string,
-    searchedText: string,
-    oldText: string
+    searchedText: string
 };
 
 
@@ -33,18 +32,16 @@ class MoviesList extends Component<Props, State> {
             movies: [],
             error: null,
             tabName: this.props.tabName,  
-            searchedText: '',
-            oldText: ''
+            searchedText: ''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     handleInputChange(event : ChangeEvent<HTMLInputElement>) {
         this.setState({ searchedText: event.target.value });
-        // this.fetchData(event.target.value);
     }
 
-    async fetchData(text : string) {
+    async fetchSearchedData(text : string) {
         try {
                 const tabName = this.state.tabName;
                 let search = text;
@@ -62,6 +59,27 @@ class MoviesList extends Component<Props, State> {
                     error: err as Error
                 });
             }
+    }
+
+    async fetchData() {
+        this.setState({
+            status: 'LOADING'
+          });
+    
+          try {
+              const tabName = this.state.tabName;
+              const moviesList = await getMovies(tabName);
+              
+              this.setState({
+                status: 'LOADED',
+                movies: moviesList
+              });
+          } catch (err) {
+              this.setState({
+                status: 'ERROR_LOADING',
+                error: err as Error
+              });
+          }
     }
     
 
@@ -87,14 +105,7 @@ class MoviesList extends Component<Props, State> {
                             <InputGroup className="search-box">
                                 <Form.Control
                                 placeholder="Search Movie"
-                                // ref={searchRef}
                                 type='text'
-                                // onInput={fetch}
-                                // onChange={(e)=>{
-                                //     this.setState({
-                                //         searchedText: e.target.value
-                                //     })
-                                // }}
                                 onChange={this.handleInputChange}
                                 />
                                 <InputGroup.Text className="search-icon">
@@ -128,112 +139,15 @@ class MoviesList extends Component<Props, State> {
         return el;
     }
 
-//     async fetchMovies() {
-
-//         this.setState({
-//             status: 'LOADING',
-//         });
-
-//         try {
-//             const tabName = this.state.tabName;
-//             let search = this.state.searchedText;
-//             let moviesList;
-            
-//             if( search === '' || search === undefined) {
-//                 moviesList = await getMovies(tabName);
-//             } else {
-//                 moviesList = await getMoviesFromSearching(tabName, search)
-//             }
-            
-//             this.setState({
-//                 status: 'LOADED',
-//                 movies: moviesList,
-//             });
-
-//         } catch (err) {
-//             this.setState({
-//                 status: 'ERROR_LOADING',
-//                 error: err as Error
-//             });
-//         }
-//    }
-
-//    componentDidMount() {
-//         console.log('componentDidMount');
-//         this.fetchMovies();
-//    }
-
-//    componentDidUpdate( oldProps : Props, oldState : State) {
-//         console.log('componentDidUpdate');
-//         console.log(oldState.searchedText);
-//         console.log(this.state.searchedText);
-//         if (oldState.searchedText !== this.state.searchedText) {
-//             console.log('inside if');
-//             this.fetchMovies();   
-//         }
-            
-//    }
-
-    
-
-    async componentDidMount() {
-      this.setState({
-        status: 'LOADING'
-      });
-
-      try {
-          const tabName = this.state.tabName;
-          const moviesList = await getMovies(tabName);
-          
-          this.setState({
-            status: 'LOADED',
-            movies: moviesList
-          });
-      } catch (err) {
-          this.setState({
-            status: 'ERROR_LOADING',
-            error: err as Error
-          });
-      }
+    componentDidMount() {
+        this.fetchData();
     }
 
     componentDidUpdate(oldProps : Props, oldState : State) {
        if (oldState.searchedText !== this.state.searchedText) {
-        this.fetchData(this.state.searchedText);
+        this.fetchSearchedData(this.state.searchedText);
        }
     }
-    // async componentDidUpdate(oldProps : Props, oldState : State) {
-    //     try {
-    //         const tabName = this.state.tabName;
-    //         let search = this.state.searchedText;
-    //       //   const moviesList = await getMovies(tabName);
-    //       let moviesList;
-    //       console.log(oldState.searchedText + 'Old');
-    //     console.log(this.state.searchedText + 'New');
-    //       if (oldState.searchedText !== this.state.searchedText) {
-    //         console.log('Inside 1st if');
-    //         if( (search === '' || search === undefined) ) {
-    //             moviesList = await getMovies(tabName);
-    //             console.log('Inside 2nd if');
-    //         } else {
-    //             moviesList = await getMoviesFromSearching(tabName, search);
-    //             console.log('Inside else');
-    //         }
-    //         this.setState({
-    //             status: 'LOADED',
-    //             movies: moviesList
-    //           });
-    //       }
-          
-            
-            
-    //     } catch (err) {
-    //         this.setState({
-    //           status: 'ERROR_LOADING',
-    //           error: err as Error
-    //         });
-    //     }
-    // }
 }
 
 export default MoviesList;
