@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { ChangeEvent, Component } from "react";
 import { Alert, Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import LoadingIndicator from "../common/LoadingIndicator";
 import IMovie from "../../models/IMovie";
@@ -36,8 +36,33 @@ class MoviesList extends Component<Props, State> {
             searchedText: '',
             oldText: ''
         };
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
+    handleInputChange(event : ChangeEvent<HTMLInputElement>) {
+        this.setState({ searchedText: event.target.value });
+        // this.fetchData(event.target.value);
+    }
+
+    async fetchData(text : string) {
+        try {
+                const tabName = this.state.tabName;
+                let search = text;
+                let moviesList  = await getMoviesFromSearching(tabName, search)
+                
+                
+                this.setState({
+                    status: 'LOADED',
+                    movies: moviesList,
+                });
+    
+            } catch (err) {
+                this.setState({
+                    status: 'ERROR_LOADING',
+                    error: err as Error
+                });
+            }
+    }
     
 
     render() {
@@ -65,11 +90,12 @@ class MoviesList extends Component<Props, State> {
                                 // ref={searchRef}
                                 type='text'
                                 // onInput={fetch}
-                                onChange={(e)=>{
-                                    this.setState({
-                                        searchedText: e.target.value
-                                    })
-                                }}
+                                // onChange={(e)=>{
+                                //     this.setState({
+                                //         searchedText: e.target.value
+                                //     })
+                                // }}
+                                onChange={this.handleInputChange}
                                 />
                                 <InputGroup.Text className="search-icon">
                                     <FontAwesomeIcon icon={faMagnifyingGlass}/>
@@ -148,6 +174,7 @@ class MoviesList extends Component<Props, State> {
             
 //    }
 
+    
 
     async componentDidMount() {
       this.setState({
@@ -170,31 +197,43 @@ class MoviesList extends Component<Props, State> {
       }
     }
 
-    async componentDidUpdate(oldProps : Props, oldState : State) {
-        try {
-            const tabName = this.state.tabName;
-            let search = this.state.searchedText;
-          //   const moviesList = await getMovies(tabName);
-          let moviesList;
-          console.log(oldState.searchedText);
-        console.log(this.state.searchedText);
-          if( (search === '' || search === undefined) ) {
-              moviesList = await getMovies(tabName);
-          } else {
-              moviesList = await getMoviesFromSearching(tabName, search)
-          }
-            
-            this.setState({
-              status: 'LOADED',
-              movies: moviesList
-            });
-        } catch (err) {
-            this.setState({
-              status: 'ERROR_LOADING',
-              error: err as Error
-            });
-        }
+    componentDidUpdate(oldProps : Props, oldState : State) {
+       if (oldState.searchedText !== this.state.searchedText) {
+        this.fetchData(this.state.searchedText);
+       }
     }
+    // async componentDidUpdate(oldProps : Props, oldState : State) {
+    //     try {
+    //         const tabName = this.state.tabName;
+    //         let search = this.state.searchedText;
+    //       //   const moviesList = await getMovies(tabName);
+    //       let moviesList;
+    //       console.log(oldState.searchedText + 'Old');
+    //     console.log(this.state.searchedText + 'New');
+    //       if (oldState.searchedText !== this.state.searchedText) {
+    //         console.log('Inside 1st if');
+    //         if( (search === '' || search === undefined) ) {
+    //             moviesList = await getMovies(tabName);
+    //             console.log('Inside 2nd if');
+    //         } else {
+    //             moviesList = await getMoviesFromSearching(tabName, search);
+    //             console.log('Inside else');
+    //         }
+    //         this.setState({
+    //             status: 'LOADED',
+    //             movies: moviesList
+    //           });
+    //       }
+          
+            
+            
+    //     } catch (err) {
+    //         this.setState({
+    //           status: 'ERROR_LOADING',
+    //           error: err as Error
+    //         });
+    //     }
+    // }
 }
 
 export default MoviesList;
