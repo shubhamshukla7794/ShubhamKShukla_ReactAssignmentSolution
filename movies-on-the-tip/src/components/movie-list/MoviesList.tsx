@@ -106,6 +106,14 @@ class MoviesList extends Component<Props, State> {
             case 'LOADED':
                 el = (
                     <div>
+                        <div>
+                            {
+                                tabName !== 'favourit' && <h4>Movies</h4>
+                            }
+                            {
+                                tabName === 'favourit' && <h4>Favourites</h4>
+                            }
+                        </div>
                         <Row className="search-box-row">
                             <InputGroup className="search-box">
                                 <Form.Control
@@ -118,7 +126,16 @@ class MoviesList extends Component<Props, State> {
                                 </InputGroup.Text>
                             </InputGroup>
                         </Row>
-                    <Row xs={2} md={3} lg={6}>
+                    {
+                        movies?.length === 0 && (
+                            <div className="no-data">
+                                <h3>No Data Found!</h3>
+                            </div>
+                        )
+                    }
+                    {
+                        movies?.length !== 0 && (
+                            <Row xs={2} md={3} lg={6}>
                         {
                             movies?.map(
                                 (movie, idx) => (
@@ -129,6 +146,8 @@ class MoviesList extends Component<Props, State> {
                             )
                         }
                     </Row>
+                        )
+                    }
                     </div>
                 );
                 break;

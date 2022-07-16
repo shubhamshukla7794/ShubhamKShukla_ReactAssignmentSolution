@@ -35,7 +35,7 @@ body {
 
 .search-box-row {
     position: relative;
-    top: -97px;
+    top: -134px;
     left: 75vw;
     margin-bottom: -60px;
 }
@@ -61,6 +61,13 @@ body {
 .poster-container {
     height: 18.5em; 
     width: 14.875em;
+}
+
+.no-data {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .card-img {
