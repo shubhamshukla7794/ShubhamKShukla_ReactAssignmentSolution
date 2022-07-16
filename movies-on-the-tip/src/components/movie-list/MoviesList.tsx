@@ -4,7 +4,7 @@ import LoadingIndicator from "../common/LoadingIndicator";
 import IMovie from "../../models/IMovie";
 import { LoadingStatus } from "../../models/types";
 import MovieListItem from "./MovieListItem";
-import { getMovies, getMoviesFromSearching } from "../../services/Movie";
+import { deleteMovieFromFavourite, getMovies, getMoviesFromSearching } from "../../services/Movie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
@@ -34,6 +34,7 @@ class MoviesList extends Component<Props, State> {
             searchedText: ''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.fetchDataAfterDelete = this.fetchDataAfterDelete.bind(this);
     }
 
     handleInputChange(event : ChangeEvent<HTMLInputElement>) {
@@ -81,6 +82,11 @@ class MoviesList extends Component<Props, State> {
           }
     }
     
+    async fetchDataAfterDelete(id:string) {
+        console.log('Fetched After Delete')
+        const deleted = await deleteMovieFromFavourite(id as string);
+        this.fetchData();
+    }
 
     render() {
 
@@ -117,7 +123,7 @@ class MoviesList extends Component<Props, State> {
                             movies?.map(
                                 (movie, idx) => (
                                     <Col key={idx} className="d-flex align-items-stretch my-3">
-                                        <MovieListItem movie={movie} tabName={tabName} />
+                                        <MovieListItem movie={movie} tabName={tabName} onDelete={this.fetchDataAfterDelete}/>
                                     </Col>
                                 )
                             )

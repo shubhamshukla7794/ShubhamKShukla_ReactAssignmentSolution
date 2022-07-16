@@ -9,10 +9,11 @@ import { addMovieToFavourite, deleteMovieFromFavourite, getMovieDetailsByTitleAn
 
 type Props = {
     movie : IMovie,
-    tabName: string
+    tabName: string,
+    onDelete: any
 };
 
-const MovieListItem = ( { movie, tabName }:Props) => {
+const MovieListItem = ( { movie, tabName , onDelete}:Props) => {
 
     const {
         id,
@@ -35,15 +36,15 @@ const MovieListItem = ( { movie, tabName }:Props) => {
         const tempMovie = await getMovieDetailsByTitleAndYear( 'favourit', title, year);
         if (tempMovie[0] === undefined) {
             const addedFavM = await addMovieToFavourite( favMovie );
-            console.log(addedFavM.id);
         } else {
             console.log('Already Exist');
         }
     }
 
     const deleteMovieFromFav = async () => {
-        const deleted = await deleteMovieFromFavourite(id as string);
-        console.log(deleted);
+        // const deleted = await deleteMovieFromFavourite(id as string);
+        // console.log(deleted);
+        onDelete(id as string);
     }
  
     return (
