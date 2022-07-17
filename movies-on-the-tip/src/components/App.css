@@ -19,12 +19,12 @@ body {
 .tab-options:hover {
     cursor: pointer;
     color: #4288c4;
-    border-bottom: 2px solid #4288c4;;
+    border-bottom: 2px solid #4288c4;
 }
 
 .tab-option-active{
     color: #4288c4;
-    border-bottom: 2px solid #4288c4;;
+    border-bottom: 2px solid #4288c4;
 }
 
 .search-box {
@@ -85,9 +85,10 @@ body {
     margin: 0.3em 0;
 }
 
-.btn-fav {
+.btn-fav, .btn-del {
     border: none;
 }
+
 
 .toast-header-text {
     font-size: 2em;
@@ -164,3 +165,28 @@ body {
     margin-bottom: 1.5em;
 }
 
+@media screen and (max-width: 768px) {
+    .menu-tabs {
+        padding-bottom:50px
+    }
+
+    .tab-options {
+        background-color: transparent;
+        border: 0;
+        color: #000;
+        padding: 10px 24px;
+        cursor: pointer;
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .tab-option-active{
+        color: #4288c4;
+        border-bottom: 2px solid #4288c4;
+    }
+
+    .search-box-row {
+        left: 20vw;
+    }
+}

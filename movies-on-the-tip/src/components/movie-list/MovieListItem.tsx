@@ -53,7 +53,7 @@ const MovieListItem = ( { movie, tabName , onDelete, onAddClick } : Props) => {
                     <div className="add-to-fav">
                         {
                             tabName==='favourit' && (
-                                <Button className="btn-fav" variant="outline-primary" onClick={deleteMovieFromFav}><FontAwesomeIcon icon={faTrash} /> Remove from Favourite</Button>
+                                <Button className="btn-del" variant="outline-primary" onClick={deleteMovieFromFav}><FontAwesomeIcon icon={faTrash} /> Remove from Favourite</Button>
                             )
                         }
                         {
