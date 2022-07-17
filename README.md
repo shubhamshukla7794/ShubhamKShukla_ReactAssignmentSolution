@@ -1,4 +1,4 @@
-#  Great Learning Front End Lab - React JS
+#  Great Learning Graded Coding Assignment - React JS
 
 This repo contains the project **Great Learning Graded Coding Assignment - React JS**. This is a React JS project developed for [**E&ICT IIT Roorkee: Advanced Certificate Program in Full Stack Software Development**](https://www.greatlearning.in/advanced-certification-full-stack-software-development-iit-roorkee) certification.
 
