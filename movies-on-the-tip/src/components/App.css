@@ -165,6 +165,29 @@ body {
     margin-bottom: 1.5em;
 }
 
+
+@media screen and (max-width: 1368px) {
+
+    .poster-container {
+        height: 16.2em; 
+        width: 12.2em;
+    }
+
+    .search-box-row {
+        left: 70vw;
+    }
+
+    .img-container {
+        width: 23em;
+        height: 34em;
+    }
+
+    .btn-del {
+        font-size: 0.806em;
+    }
+       
+}
+
 @media screen and (max-width: 768px) {
     .menu-tabs {
         padding-bottom:50px
