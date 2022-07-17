@@ -38,7 +38,7 @@ to install the modules and then
 
 The following video shows the application
 
-[Movie on the tip](https://dtrive.google.com/file/d/1yADYhxIkMETS8Xo8rcWc5TUUteAi-lV4/view)
+[Movie on the tip](https://drive.google.com/file/d/1yADYhxIkMETS8Xo8rcWc5TUUteAi-lV4/view?usp=sharing)
 
 Please, download for better view
 
