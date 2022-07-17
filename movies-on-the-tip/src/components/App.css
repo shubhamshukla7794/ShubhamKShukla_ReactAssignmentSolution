@@ -165,6 +165,26 @@ body {
     margin-bottom: 1.5em;
 }
 
+.modal-content {
+    background-color: transparent;
+    border: none;
+}
+.custom-model-header {
+    top: -26px;
+    position: relative;
+    width: 63vw;
+    border: none;
+}
+.custom-model-body {
+    height: 90vh;
+    top: -40px;
+}
+.custom-modal-image {
+    height: 100%;
+}
+
+
+
 
 @media screen and (max-width: 1368px) {
 

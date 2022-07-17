@@ -77,12 +77,12 @@ const MovieDetails = ( props : Props ) => {
             el = (
                 <>
                 <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton></Modal.Header>
-                    <Modal.Body>
+                    <Modal.Header closeButton className="custom-model-header"></Modal.Header>
+                    <Modal.Body className="custom-model-body">
                         <img 
                             src={`${process.env.REACT_APP_BASE_URL}/images/${poster}`} 
                             alt="{title}" 
-                            className="w-100"
+                            className="w-100 custom-modal-image"
                         />
                     </Modal.Body>
                 </Modal>
@@ -93,7 +93,7 @@ const MovieDetails = ( props : Props ) => {
                 <Container>
                     <hr className="hr-movie-details"/>
                     <Row>
-                        <Col xs={12} lg={4}>
+                        <Col xs={12} lg={5}>
                                 <img 
                                     src={`${process.env.REACT_APP_BASE_URL}/images/${poster}`} 
                                     alt={title} 
@@ -101,7 +101,7 @@ const MovieDetails = ( props : Props ) => {
                                     onClick={handleShow}
                                 />
                         </Col>
-                        <Col xs={12} lg={8}>
+                        <Col xs={12} lg={7}>
                             <Row>
                                 <Col xs={12}>
                                     <h1><span className="movieTitle">{title}</span> <span className="movieYear">({year})</span></h1>
