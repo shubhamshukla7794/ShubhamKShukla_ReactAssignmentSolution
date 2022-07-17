@@ -1,12 +1,13 @@
 import { ChangeEvent, Component } from "react";
-import { Alert, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Alert, Col, Form, InputGroup, Row, Toast, ToastContainer } from "react-bootstrap";
 import LoadingIndicator from "../common/LoadingIndicator";
 import IMovie from "../../models/IMovie";
 import { LoadingStatus } from "../../models/types";
 import MovieListItem from "./MovieListItem";
-import { deleteMovieFromFavourite, getMovies, getMoviesFromSearching } from "../../services/Movie";
+import { addMovieToFavourite, deleteMovieFromFavourite, getMovieDetailsByTitleAndYear, getMovies, getMoviesFromSearching } from "../../services/Movie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck, faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 
 type Props = {
     tabName: string,
@@ -17,7 +18,10 @@ type State = {
     movies?: IMovie[],
     error?: Error | null,
     tabName: string,
-    searchedText: string
+    searchedText: string,
+    show: boolean,
+    response: string,
+    responseText: string
 };
 
 
@@ -31,10 +35,14 @@ class MoviesList extends Component<Props, State> {
             movies: [],
             error: null,
             tabName: this.props.tabName,  
-            searchedText: ''
+            searchedText: '',
+            show: false,
+            response: '',
+            responseText: ''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.fetchDataAfterDelete = this.fetchDataAfterDelete.bind(this);
+        this.addSelectedMovieToFavourite = this.addSelectedMovieToFavourite.bind(this);
     }
 
     handleInputChange(event : ChangeEvent<HTMLInputElement>) {
@@ -86,6 +94,31 @@ class MoviesList extends Component<Props, State> {
         console.log('Fetched After Delete')
         const deleted = await deleteMovieFromFavourite(id as string);
         this.fetchData();
+        this.setState({
+            show: true,
+            response: 'Success',
+            responseText: 'Successfully removed from Favourite'
+        });
+    }
+
+    async addSelectedMovieToFavourite(movieToAdd:IMovie) {
+        const tempMovie = await getMovieDetailsByTitleAndYear( 'favourit', movieToAdd.title, movieToAdd.year);
+        if (tempMovie[0] === undefined) {
+            const addedFavM = await addMovieToFavourite( movieToAdd );
+            console.log(addedFavM.title);
+            this.setState({
+                show: true,
+                response: 'Success',
+                responseText: 'Successfully added to Favourite'
+            });
+        } else {
+            console.log('Already Exist');
+            this.setState({
+                show: true,
+                response: 'Error',
+                responseText: 'Already added in Favourite'
+            });
+        }
     }
 
     render() {
@@ -140,7 +173,11 @@ class MoviesList extends Component<Props, State> {
                             movies?.map(
                                 (movie, idx) => (
                                     <Col key={idx} className="d-flex align-items-stretch my-3">
-                                        <MovieListItem movie={movie} tabName={tabName} onDelete={this.fetchDataAfterDelete}/>
+                                        <MovieListItem 
+                                        movie={movie} 
+                                        tabName={tabName} 
+                                        onDelete={this.fetchDataAfterDelete}
+                                        onAddClick={this.addSelectedMovieToFavourite}/>
                                     </Col>
                                 )
                             )
@@ -148,6 +185,29 @@ class MoviesList extends Component<Props, State> {
                     </Row>
                         )
                     }
+                    <ToastContainer position="top-end" className="p-3">
+                        <Toast 
+                            onClose={() => this.setState({show: false})} 
+                            show={this.state.show} 
+                            delay={1500} 
+                            autohide
+                        >
+                            <Toast.Header>
+                                {
+                                    this.state.response === 'Success' && (
+                                        <FontAwesomeIcon icon={faCircleCheck} size="2x" style={{color:'#2A9134'}}/>
+                                    )
+                                }
+                                {
+                                    this.state.response === 'Error' && (
+                                        <FontAwesomeIcon icon={faCircleXmark} size="2x" style={{color:'#FF0000'}}/>
+                                    )
+                                }
+                                <strong className="me-auto toast-header-text">{this.state.response}</strong>
+                            </Toast.Header>
+                            <Toast.Body className="toast-body-text">{this.state.responseText}</Toast.Body>
+                        </Toast>
+                    </ToastContainer>
                     </div>
                 );
                 break;

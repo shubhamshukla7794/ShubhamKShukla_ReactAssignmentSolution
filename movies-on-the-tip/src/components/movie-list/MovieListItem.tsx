@@ -4,16 +4,16 @@ import { useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import IMovie from "../../models/IMovie";
-import { addMovieToFavourite, deleteMovieFromFavourite, getMovieDetailsByTitleAndYear } from "../../services/Movie";
 
 
 type Props = {
     movie : IMovie,
     tabName: string,
-    onDelete: any
+    onDelete: any,
+    onAddClick: any
 };
 
-const MovieListItem = ( { movie, tabName , onDelete}:Props) => {
+const MovieListItem = ( { movie, tabName , onDelete, onAddClick } : Props) => {
 
     const {
         id,
@@ -30,21 +30,14 @@ const MovieListItem = ( { movie, tabName , onDelete}:Props) => {
         id: id
     });
 
-
     const addMovieToFav = async () => {
         const {id, ...favMovie} = movie;
-        const tempMovie = await getMovieDetailsByTitleAndYear( 'favourit', title, year);
-        if (tempMovie[0] === undefined) {
-            const addedFavM = await addMovieToFavourite( favMovie );
-        } else {
-            console.log('Already Exist');
-        }
+        onAddClick(favMovie);
     }
 
     const deleteMovieFromFav = async () => {
-        // const deleted = await deleteMovieFromFavourite(id as string);
-        // console.log(deleted);
         onDelete(id as string);
+        console.log('After on Delete');        
     }
  
     return (
