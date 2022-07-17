@@ -38,10 +38,9 @@ to install the modules and then
 
 The following video shows the application
 
+[Movie on the tip](https://dtrive.google.com/file/d/1yADYhxIkMETS8Xo8rcWc5TUUteAi-lV4/view)
 
-
-
-
+Please, download for better view
 
 
 
